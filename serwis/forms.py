@@ -22,3 +22,30 @@ class ZgloszenieForm(ModelForm):
             'data_zamkniecia',
             'czas_zamkniecia'
         ]
+
+
+class ListaZglaszajacychForm(ModelForm):
+    class Meta:
+        model = ListaZglaszajacych
+        fields = [
+            'ListaZglaszajacych',
+            'aktywny'
+        ]
+
+
+class Urzadzenie(ModelForm):
+    class Meta:
+        model = Urzadzenie
+        fields = [
+            'nazwa_urzadzenia',
+            'aktywny'
+        ]
+
+
+class RodzajUsterki(ModelForm):
+    class Meta:
+        model = RodzajUsterki
+        fields = [
+            'rodzaj_usterki',
+            'aktywny'
+        ]

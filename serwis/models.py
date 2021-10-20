@@ -41,8 +41,13 @@ class ZgloszenieUsterki(models.Model):
     rodzaj_usterki = models.ForeignKey(RodzajUsterki, on_delete=models.CASCADE, default=1)
     urzadzenie = models.ForeignKey(Urzadzenie, on_delete=models.CASCADE, default=1)
     opis_zgloszenia = models.TextField()
+    status = models.DecimalField(max_digits=1, decimal_places=0)
     data_otwarcia = models.DateField('data otwarcia')
     czas_otwarcia = models.TimeField('czas otwarcia')
     serwisant = models.ForeignKey(Autor, on_delete=models.CASCADE, default=1)
+    opis_rozwiazania = models.TextField()
     data_zamkniecia = models.DateField('data zamknięcia')
     czas_zamkniecia = models.TimeField('czas zamknięcia')
+
+    def __str__(self):
+        return self.temat_zgloszenia

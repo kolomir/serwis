@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import ZgloszenieUsterki, ListaZglaszajacych, Urzadzenie, RodzajUsterki, Autor
-from .forms import ZgloszenieForm, RodzajUsterkiForm
+from .forms import ZgloszenieForm, RodzajUsterkiForm, UrzadzenieForm
 from datetime import datetime
 from django.contrib.auth.decorators import login_required
 
@@ -30,6 +30,23 @@ def nowy_RodzajUsterek(request):
         'form_RodzajUsterki': form_RodzajUsterki
     }
     return render(request, 'serwis/form_rodzaj_usterek.html', context)
+
+
+#---------------------------------------------------
+#  Formularz do wprowadzania Maszyn i Urządzeń do bazy
+#---------------------------------------------------
+@login_required
+def nowe_Urzadzenie(request):
+    form_Urzadzenia = UrzadzenieForm(request.POST or None, request.FILES or None)
+
+    if form_Urzadzenia.is_valid():
+        form_Urzadzenia.save()
+        return redirect(nowe_zgloszenia)
+
+    context = {
+        'form_Urzadzenia': form_Urzadzenia
+    }
+    return render(request, 'serwis/form_urzadzenie.html', context)
 
 
 

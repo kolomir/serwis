@@ -28,7 +28,7 @@ class ListaZglaszajacychForm(ModelForm):
     class Meta:
         model = ListaZglaszajacych
         fields = [
-            'ListaZglaszajacych',
+            'nr_zglaszajacego',
             'aktywny'
         ]
 

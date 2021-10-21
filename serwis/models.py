@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 class Autor(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, unique=True)
     serwisant = models.BooleanField(default=False)
+    aktywny = models.BooleanField(default=True)
 
     def __str__(self):
         return self.user.username

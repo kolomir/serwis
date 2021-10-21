@@ -33,7 +33,7 @@ class ListaZglaszajacychForm(ModelForm):
         ]
 
 
-class Urzadzenie(ModelForm):
+class UrzadzenieForm(ModelForm):
     class Meta:
         model = Urzadzenie
         fields = [
@@ -42,7 +42,7 @@ class Urzadzenie(ModelForm):
         ]
 
 
-class RodzajUsterki(ModelForm):
+class RodzajUsterkiForm(ModelForm):
     class Meta:
         model = RodzajUsterki
         fields = [

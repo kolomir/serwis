@@ -4,7 +4,8 @@ from .models import ZgloszenieUsterki, ListaZglaszajacych, Urzadzenie, RodzajUst
 
 @admin.register(Autor)
 class AutorAdmin(admin.ModelAdmin):
-    list_display = ('user',)
+    list_display = ('user', 'serwisant')
+    list_filter = ('serwisant', 'aktywny')
 
 
 @admin.register(RodzajUsterki)

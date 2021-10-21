@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from .models import ZgloszenieUsterki, ListaZglaszajacych, Urzadzenie, RodzajUsterki, Autor
-from .forms import ZgloszenieForm
+from .forms import ZgloszenieForm, RodzajUsterkiForm
 from datetime import datetime
+from django.contrib.auth.decorators import login_required
 
 
 #---------------------------------------------------
@@ -12,6 +13,24 @@ def get_author(user):
     if qs.exists():
         return qs[0]
     return None
+
+
+#---------------------------------------------------
+#  Formularz do wprowadzania Rodzajów Usterek
+#---------------------------------------------------
+@login_required
+def nowy_RodzajUsterek(request):
+    form_RodzajUsterki = RodzajUsterkiForm(request.POST or None, request.FILES or None)
+
+    if form_RodzajUsterki.is_valid():
+        form_RodzajUsterki.save()
+        return redirect(nowe_zgloszenia)
+
+    context = {
+        'form_RodzajUsterki': form_RodzajUsterki
+    }
+    return render(request, 'serwis/form_rodzaj_usterek.html', context)
+
 
 
 #---------------------------------------------------

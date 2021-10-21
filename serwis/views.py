@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import ZgloszenieUsterki, ListaZglaszajacych, Urzadzenie, RodzajUsterki, Autor
-from .forms import ZgloszenieForm, RodzajUsterkiForm, UrzadzenieForm
+from .forms import ZgloszenieForm, RodzajUsterkiForm, UrzadzenieForm, ListaZglaszajacychForm
 from datetime import datetime
 from django.contrib.auth.decorators import login_required
 
@@ -48,6 +48,22 @@ def nowe_Urzadzenie(request):
     }
     return render(request, 'serwis/form_urzadzenie.html', context)
 
+
+#---------------------------------------------------
+#  Formularz do wprowadzania Maszyn i Urządzeń do bazy
+#---------------------------------------------------
+@login_required
+def nowy_Zglaszajacy(request):
+    form_Zglaszajacy = ListaZglaszajacychForm(request.POST or None, request.FILES or None)
+
+    if form_Zglaszajacy.is_valid():
+        form_Zglaszajacy.save()
+        return redirect(nowy_Zglaszajacy)
+
+    context = {
+        'form_Zglaszajacy': form_Zglaszajacy
+    }
+    return render(request, 'serwis/form_zglaszajacy.html', context)
 
 
 #---------------------------------------------------

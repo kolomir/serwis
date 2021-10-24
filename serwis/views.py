@@ -40,15 +40,17 @@ def nowy_RodzajUsterek(request):
 @login_required
 def nowe_Urzadzenie(request):
     form_Urzadzenia = UrzadzenieForm(request.POST or None, request.FILES or None)
+    urzadzenia = Urzadzenie.objects.all().order_by('nazwa_urzadzenia')
 
     if form_Urzadzenia.is_valid():
         form_Urzadzenia.save()
-        return redirect(nowe_zgloszenia)
+        return redirect(nowe_Urzadzenie)
 
     context = {
-        'form_Urzadzenia': form_Urzadzenia
+        'form_Urzadzenia': form_Urzadzenia,
+        'urzadzenia': urzadzenia
     }
-    return render(request, 'serwis/form_urzadzenie.html', context)
+    return render(request, 'serwis/nowe_urzadzenia.html', context)
 
 
 #---------------------------------------------------

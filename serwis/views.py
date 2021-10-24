@@ -16,20 +16,22 @@ def get_author(user):
 
 
 #---------------------------------------------------
-#  Formularz do wprowadzania Rodzajów Usterek
+#  Formularze Rodzajów Usterek
 #---------------------------------------------------
 @login_required
 def nowy_RodzajUsterek(request):
     form_RodzajUsterki = RodzajUsterkiForm(request.POST or None, request.FILES or None)
+    rodzaj_usterki = RodzajUsterki.objects.all().order_by('rodzaj_usterki')
 
     if form_RodzajUsterki.is_valid():
         form_RodzajUsterki.save()
-        return redirect(nowe_zgloszenia)
+        return redirect(nowy_RodzajUsterek)
 
     context = {
-        'form_RodzajUsterki': form_RodzajUsterki
+        'form_RodzajUsterki': form_RodzajUsterki,
+        'rodzaj_usterki': rodzaj_usterki
     }
-    return render(request, 'serwis/form_rodzaj_usterek.html', context)
+    return render(request, 'serwis/nowy_rodzaj_usterki.html', context)
 
 
 #---------------------------------------------------
@@ -95,3 +97,5 @@ def dodaj_zgloszenie(request):
 
     return render(request, 'serwis/nowe_zgloszenia.html', context)
 
+def test(request):
+    return render(request, 'serwis/test.html')
